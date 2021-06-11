@@ -1,6 +1,26 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+</head>
+
 <body>
-  Hello world!
+    <div> </div>
+    <script>
+        var a = [];
+        $.getJSON("birthday.json", function (data) {
+            $.each(data.figures, function (i, figure) {
+                var j = 0;
+                while (j < i && (figure.month << 5) + figure.day > (a[j].month << 5) + a[j].day) {
+                    j++;
+                }
+                a.splice(j, 0, figure);
+            });
+            for (i in a) {
+                $("div").append(a[i].name + " " + a[i].month + "/" + a[i].day + " " + a[i].game + "<br>");
+            }
+        });
+    </script>
 </body>
+
 </html>
